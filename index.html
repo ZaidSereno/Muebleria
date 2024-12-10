@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mueblería</title>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+</head>
+<body>
+    <header class="bg-success text-center text-white py-3">
+        <span class="h2">VUE</span>
+    </header>
+
+    <section class="container-fluid text-center my-4" id="contenedor">
+        <div class="row">
+            <h2 class="text-center col-12 mb-4">Muebles</h2>
+
+            <div class="col-md-4 mb-4" v-for="(mueble, index) in muebles" :key="mueble.id">
+                <div class="card">
+                    <img :src="mueble.image" class="card-img-top" :alt="mueble.name">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ mueble.name }}</h5>
+                        <p class="card-text">Precio: ${{ mueble.price }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Categoría: {{ mueble.category }}</li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <button 
+                                class="btn btn-outline-danger btn-sm" 
+                                @click="disminuirCantidad(mueble)"
+                                :disabled="mueble.cantidad === 1">
+                                -
+                            </button>
+                            <span class="mx-3">Cantidad: {{ mueble.cantidad }}</span>
+                            <button 
+                                class="btn btn-outline-success btn-sm" 
+                                @click="aumentarCantidad(mueble)">
+                                +
+                            </button>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-center gap-3">
+                                <div 
+                                    class="color-circle bg-primary" 
+                                    :class="{ selected: mueble.selectedColor === 'Rojo' }" 
+                                    @click="seleccionarColor(mueble, 'Rojo')">
+                                </div>
+                                <div 
+                                    class="color-circle bg-danger" 
+                                    :class="{ selected: mueble.selectedColor === 'Rosa' }" 
+                                    @click="seleccionarColor(mueble, 'Rosa')">
+                                </div>
+                                <div 
+                                    class="color-circle bg-success" 
+                                    :class="{ selected: mueble.selectedColor === 'Azul' }" 
+                                    @click="seleccionarColor(mueble, 'Azul')">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-center text-white py-3">
+        <span class="h2 col-12">Frameworks</span>
+    </footer>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.js"></script>
+    <script src="./js/script.js"></script> 
+</body>
+
+</html>
